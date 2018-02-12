@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="poc-agent_main" target="1.8" />
+      <module name="poc-agent_test" target="1.8" />
+      <module name="poc-config_main" target="1.8" />
+      <module name="poc-config_test" target="1.8" />
+      <module name="poc-eureka_main" target="1.8" />
+      <module name="poc-eureka_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
