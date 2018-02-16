@@ -5,8 +5,8 @@ buildscript {
 		projectVersion 		= '1.0.0'
 		projectName			= 'Distributed POC'
 
-		springBootVersion 	= '1.5.2.RELEASE'
-		springCloudVersion 	= 'Dalston.SR1'
+		springBootVersion 	= '1.5.9.RELEASE'
+		springCloudVersion 	= 'Edgware.SR2'
 
 		junitVersion 		= '4.12'
 	}
