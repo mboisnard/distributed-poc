@@ -5,8 +5,8 @@ buildscript {
 		projectVersion 		= '1.0.0'
 		projectName			= 'Distributed POC'
 
-		springBootVersion 	= '2.0.0.RC1'
-		springCloudVersion 	= 'Finchley.M6'
+		springBootVersion 	= '1.5.2.RELEASE'
+		springCloudVersion 	= 'Dalston.SR1'
 
 		junitVersion 		= '4.12'
 	}
@@ -20,10 +20,6 @@ buildscript {
 	dependencies {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 	}
-}
-
-plugins {
-	id "org.sonarqube" version "2.6"
 }
 
 allprojects {
@@ -49,7 +45,7 @@ subprojects {
 	}
 
 	dependencies {
-	    compile 'org.springframework.cloud:spring-cloud-starter-config'
+		compile 'org.springframework.cloud:spring-cloud-starter-eureka'
 	    compile 'org.springframework.boot:spring-boot-starter-actuator'
 
 	    compileOnly 'org.projectlombok:lombok'

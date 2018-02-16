@@ -1,5 +1,4 @@
 rootProject.name = 'Distributed POC'
 
 include 'poc-eureka'
-include 'poc-config'
 include 'poc-agent'
