@@ -1,0 +1,75 @@
+
+version: '3.5'
+
+volumes:
+  zookeeper-data-volume:
+  zookeeper-logs-volume:
+  kafka-data-volume:
+  kafka-logs-volume:
+
+networks:
+  spring-cloud-network:
+  kafka-network:
+
+services:
+
+  poc-zookeeper:
+    image: zookeeper:latest
+    volumes:
+      - zookeeper-data-volume:/data
+      - zookeeper-logs-volume:/datalog
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    networks:
+      - kafka-network
+
+  poc-kafka:
+    image: ches/kafka:latest
+    volumes:
+      - kafka-data-volume:/data
+      - kafka-logs-volume:/logs
+    ports:
+      - 9092:9092
+    networks:
+      - kafka-network
+    environment:
+      ZOOKEEPER_IP: poc-zookeeper
+      KAFKA_ADVERTISED_HOST_NAME: "192.168.56.210"
+
+  poc-eureka:
+    build:
+      context: ./poc-eureka
+    ports:
+      - 8000:8080
+    networks:
+      - spring-cloud-network
+
+  poc-agent:
+    build:
+      context: ./poc-agent
+    networks:
+      - spring-cloud-network
+      - kafka-network
+
+  poc-customer:
+    build:
+      context: ./poc-customer
+    networks:
+      - spring-cloud-network
+      - kafka-network
+
+  poc-order:
+    build:
+      context: ./poc-order
+    networks:
+      - spring-cloud-network
+      - kafka-network
+
+  poc-proposal:
+    build:
+      context: ./poc-proposal
+    networks:
+      - spring-cloud-network
+      - kafka-network

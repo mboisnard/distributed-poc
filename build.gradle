@@ -25,10 +25,17 @@ buildscript {
 allprojects {
 	group projectGroupName
 	version projectVersion
+
+	apply plugin: 'java'
+
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
 }
 
-subprojects {
-	apply plugin: 'java'
+configure(subprojects.findAll {it.name != 'poc-metrics-sender'}) {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 
@@ -38,16 +45,9 @@ subprojects {
 		}
 	}
 
-	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
-	}
-
 	dependencies {
 		compile 'org.springframework.cloud:spring-cloud-starter-eureka'
-	    compile 'org.springframework.boot:spring-boot-starter-actuator'
-
+		compile 'org.springframework.boot:spring-boot-starter-actuator'
 	    compileOnly 'org.projectlombok:lombok'
 
 		testCompile "junit:junit:${junitVersion}"
