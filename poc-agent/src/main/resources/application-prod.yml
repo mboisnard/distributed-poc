@@ -18,5 +18,5 @@ eureka:
     enabled: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8000/eureka/
+      defaultZone: http://poc-eureka:8000/eureka/
     registerWithEureka: true

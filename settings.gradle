@@ -2,3 +2,6 @@ rootProject.name = 'Distributed POC'
 
 include 'poc-eureka'
 include 'poc-agent'
+include 'poc-order'
+include 'poc-customer'
+include 'poc-proposal'

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: poc-agent
+    name: poc-proposal
 
 server:
   port: 0
