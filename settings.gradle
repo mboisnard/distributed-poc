@@ -6,6 +6,4 @@ include 'poc-order'
 include 'poc-customer'
 include 'poc-proposal'
 include 'poc-metrics-sender'
-include 'bocet'
-include 'metricsreceiver'
-
+include 'poc-metrics-receiver'

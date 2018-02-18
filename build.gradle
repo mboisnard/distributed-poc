@@ -35,7 +35,7 @@ allprojects {
 	}
 }
 
-configure(subprojects.findAll {it.name != 'poc-metrics-sender'}) {
+configure(subprojects.findAll {it.name != 'poc-metrics-sender' && it.name != 'poc-metrics-receiver'}) {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 
