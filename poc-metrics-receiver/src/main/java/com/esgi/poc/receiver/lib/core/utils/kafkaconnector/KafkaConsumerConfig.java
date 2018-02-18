@@ -17,10 +17,10 @@ import java.util.Map;
 @Configuration
 class KafkaConsumerConfig {
 
-    @Value("${kafka.bootstrap.servers}")
+    @Value("127.0.0.1")
     private String bootstrapServers;
 
-    @Value("${kafka.consumer.group}")
+    @Value("test")
     private String consumerGroup;
 
     @Bean
