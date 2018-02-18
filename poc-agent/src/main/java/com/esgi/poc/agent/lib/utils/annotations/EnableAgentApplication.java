@@ -1,4 +1,4 @@
-package com.esgi.poc.agent.lib;
+package com.esgi.poc.agent.lib.utils.annotations;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -12,5 +12,7 @@ import java.lang.annotation.*;
 @SpringBootApplication
 @EnableScheduling
 public @interface EnableAgentApplication {
-    public boolean enabled() default true;
+    boolean enabled() default true;
+    String ip() default "127.0.0.1";
+    String port() default "2181";
 }
