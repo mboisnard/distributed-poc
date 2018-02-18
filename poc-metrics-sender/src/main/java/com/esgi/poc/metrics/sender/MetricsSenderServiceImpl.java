@@ -3,9 +3,11 @@ package com.esgi.poc.metrics.sender;
 import com.esgi.poc.metrics.Metrics;
 import com.netflix.discovery.EurekaClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.endpoint.HealthEndpoint;
 import org.springframework.boot.actuate.endpoint.MetricsEndpoint;
 import org.springframework.boot.actuate.health.Health;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class MetricsSenderServiceImpl implements MetricsSenderService {
+class MetricsSenderServiceImpl implements MetricsSenderService {
 
     private final MetricsEndpoint metricsEndpoint;
 
@@ -21,12 +23,20 @@ public class MetricsSenderServiceImpl implements MetricsSenderService {
 
     private final EurekaClient eurekaClient;
 
-    public MetricsSenderServiceImpl(final MetricsEndpoint metricsEndpoint,
-                                    final HealthEndpoint healthEndpoint,
-                                    final EurekaClient eurekaClient) {
+    private final KafkaTemplate<String, Metrics> kafkaTemplate;
+
+    private final String kafkaTopic;
+
+    MetricsSenderServiceImpl(final MetricsEndpoint metricsEndpoint,
+                             final HealthEndpoint healthEndpoint,
+                             final EurekaClient eurekaClient,
+                             final KafkaTemplate<String, Metrics> kafkaTemplate,
+                             @Value("${kafka.topic.metrics}") final String kafkaTopic) {
         this.metricsEndpoint = metricsEndpoint;
         this.healthEndpoint = healthEndpoint;
         this.eurekaClient = eurekaClient;
+        this.kafkaTemplate = kafkaTemplate;
+        this.kafkaTopic = kafkaTopic;
     }
 
     @Override
@@ -61,5 +71,6 @@ public class MetricsSenderServiceImpl implements MetricsSenderService {
             .build();
 
         log.info(metricsToSend.toString());
+        kafkaTemplate.send(kafkaTopic, metricsToSend);
     }
 }

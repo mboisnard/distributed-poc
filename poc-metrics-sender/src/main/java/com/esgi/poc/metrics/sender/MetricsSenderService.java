@@ -1,6 +1,6 @@
 package com.esgi.poc.metrics.sender;
 
-public interface MetricsSenderService {
+interface MetricsSenderService {
 
     void sendMetrics();
 }
