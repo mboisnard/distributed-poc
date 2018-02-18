@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class MetricsSenderServiceImpl implements MetricsSenderService {
+class MetricsSenderServiceImpl implements MetricsSenderService {
 
     private final MetricsEndpoint metricsEndpoint;
 
@@ -21,7 +21,7 @@ public class MetricsSenderServiceImpl implements MetricsSenderService {
 
     private final EurekaClient eurekaClient;
 
-    public MetricsSenderServiceImpl(final MetricsEndpoint metricsEndpoint,
+    MetricsSenderServiceImpl(final MetricsEndpoint metricsEndpoint,
                                     final HealthEndpoint healthEndpoint,
                                     final EurekaClient eurekaClient) {
         this.metricsEndpoint = metricsEndpoint;
