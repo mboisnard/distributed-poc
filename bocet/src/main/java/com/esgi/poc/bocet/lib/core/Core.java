@@ -1,7 +1,7 @@
-package com.esgi.poc.agent.lib.core;
+package com.esgi.poc.bocet.lib.core;
 
-import com.esgi.poc.agent.lib.utils.annotations.EnableAgentApplication;
-import com.esgi.poc.agent.lib.utils.miscellaneous.AgentLoggin;
+import com.esgi.poc.bocet.lib.utils.annotations.EnableAgentApplication;
+import com.esgi.poc.bocet.lib.utils.miscellaneous.AgentLogging;
 
 import java.lang.annotation.Annotation;
 
@@ -15,8 +15,8 @@ public class Core {
                 String ip = coredatas.ip();
                 String port = coredatas.port();
 
-                AgentLoggin.log("ip", ip);
-                AgentLoggin.log("port", port);
+                AgentLogging.log("ip", ip);
+                AgentLogging.log("port", port);
             }
         }
     }
