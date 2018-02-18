@@ -3,4 +3,5 @@ dependencies {
     compileOnly 'org.springframework.kafka:spring-kafka:1.1.7.RELEASE'
     compileOnly "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
     compileOnly 'org.projectlombok:lombok:1.16.18'
+    testCompile "junit:junit:${junitVersion}"
 }

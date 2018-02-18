@@ -13,20 +13,8 @@ networks:
 
 services:
 
-  poc-zookeeper:
-    image: zookeeper:latest
-    volumes:
-      - zookeeper-data-volume:/data
-      - zookeeper-logs-volume:/datalog
-    ports:
-      - 2181:2181
-      - 2888:2888
-      - 3888:3888
-    networks:
-      - kafka-network
-
   poc-kafka:
-    image: ches/kafka:latest
+    image: spotify/kafka:latest
     volumes:
       - kafka-data-volume:/data
       - kafka-logs-volume:/logs

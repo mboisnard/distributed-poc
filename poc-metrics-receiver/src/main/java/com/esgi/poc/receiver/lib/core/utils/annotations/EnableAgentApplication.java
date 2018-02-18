@@ -1,4 +1,4 @@
-package com.esgi.poc.bocet.lib.utils.annotations;
+package com.esgi.poc.receiver.lib.core.utils.annotations;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
