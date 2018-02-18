@@ -12,7 +12,6 @@ import java.lang.annotation.*;
 @SpringBootApplication
 @EnableScheduling
 public @interface EnableAgentApplication {
-    boolean enabled() default true;
     String ip() default "127.0.0.1";
     String port() default "2181";
 }
