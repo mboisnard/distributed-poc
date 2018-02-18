@@ -1,13 +1,9 @@
 package com.esgi.poc.agent;
 
+import com.esgi.poc.agent.lib.EnableAgentApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
-@EnableEurekaClient
-@EnableScheduling
-@SpringBootApplication
+@EnableAgentApplication()
 public class AgentApplication {
 
     public static void main(String[] args) {
