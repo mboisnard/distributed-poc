@@ -1,12 +1,11 @@
 package com.esgi.poc.bocet.lib.utils.miscellaneous;
 
-import com.esgi.poc.bocet.lib.core.Core;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class AgentLogging {
-    public static void log(String field,String value){
-        Logger logger = LoggerFactory.getLogger(Core.class);
-        logger.info(field + " = [" + value + "]");
+
+    public static void log(final String field, final String value) {
+        log.info(field + " = [" + value + "]");
     }
 }
