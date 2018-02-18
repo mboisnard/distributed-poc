@@ -2,8 +2,6 @@ package com.esgi.poc.receiver.lib.core;
 
 import com.esgi.poc.receiver.lib.core.utils.annotations.EnableAgentApplication;
 import com.esgi.poc.receiver.lib.core.utils.miscellaneous.AgentLogging;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.lang.annotation.Annotation;
 
