@@ -20,3 +20,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8000/eureka/
     registerWithEureka: true
+
+kafka:
+  bootstrap:
+    servers: localhost:9092
