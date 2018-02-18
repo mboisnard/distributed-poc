@@ -7,6 +7,3 @@ include 'poc-customer'
 include 'poc-proposal'
 include 'poc-metrics-sender'
 include 'bocet'
-
-include ':bocet'
-project(':bocet').projectDir = new File(settingsDir, 'bocet')
