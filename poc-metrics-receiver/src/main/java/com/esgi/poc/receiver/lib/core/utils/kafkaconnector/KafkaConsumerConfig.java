@@ -1,7 +1,11 @@
 package com.esgi.poc.receiver.lib.core.utils.kafkaconnector;
 
+import com.esgi.poc.receiver.lib.core.utils.annotations.EnableAgentApplication;
+import com.esgi.poc.receiver.lib.core.utils.miscellaneous.AgentLogging;
+import com.esgi.poc.receiver.lib.core.utils.miscellaneous.ServerInfos;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,23 +20,25 @@ import java.util.Map;
 
 @Configuration
 class KafkaConsumerConfig {
+    private ServerInfos serverInfos;
 
-    @Value("127.0.0.1")
-    private String bootstrapServers;
+    @Autowired
+    public KafkaConsumerConfig(ServerInfos serverInfos){
+        this.serverInfos = serverInfos;
+    }
 
     @Value("test")
     private String consumerGroup;
 
     @Bean
     public Map<String, Object> consumerConfigs() {
+        String bootstrapServers = serverInfos.getIp() + ":" + serverInfos.getPort();
+        AgentLogging.log("Kafka informations", bootstrapServers);
 
         final Map<String, Object> props = new HashMap<>();
-
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-
-        // allows a pool of processes to divide the work of consuming and processing records
         props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroup);
 
         return props;

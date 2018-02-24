@@ -6,12 +6,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.lang.annotation.*;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+
 @EnableEurekaClient
 @SpringBootApplication
 @EnableScheduling
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface EnableAgentApplication {
-    String ip() default "127.0.0.1";
-    String port() default "2181";
+    String ip();
+    String port();
 }
