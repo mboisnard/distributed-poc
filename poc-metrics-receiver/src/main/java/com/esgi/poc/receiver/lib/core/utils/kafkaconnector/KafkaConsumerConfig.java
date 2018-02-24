@@ -1,6 +1,5 @@
 package com.esgi.poc.receiver.lib.core.utils.kafkaconnector;
 
-import com.esgi.poc.receiver.lib.core.utils.annotations.EnableAgentApplication;
 import com.esgi.poc.receiver.lib.core.utils.miscellaneous.AgentLogging;
 import com.esgi.poc.receiver.lib.core.utils.miscellaneous.ServerInfos;
 import org.apache.kafka.clients.consumer.ConsumerConfig;

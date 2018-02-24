@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = {"com.esgi.poc"})
-@EnableAgentApplication(ip = "192.168.1.1", port = "9092")
+@EnableAgentApplication(ip = "127.0.0.1", port = "9092", topic = "${kafka.topic.devops}")
 public class AgentApplication {
     public static void main(String[] args) {
         SpringApplication.run(AgentApplication.class);

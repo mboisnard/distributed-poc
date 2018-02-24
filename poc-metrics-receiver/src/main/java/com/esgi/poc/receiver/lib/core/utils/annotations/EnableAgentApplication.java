@@ -15,4 +15,5 @@ import java.lang.annotation.*;
 public @interface EnableAgentApplication {
     String ip();
     String port();
+    String topic();
 }
