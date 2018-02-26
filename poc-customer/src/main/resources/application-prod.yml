@@ -3,7 +3,7 @@ spring:
     name: poc-customer
 
 server:
-  port: 0
+  port: 8080
 
 management:
   security:
@@ -18,7 +18,7 @@ eureka:
     enabled: true
   client:
     serviceUrl:
-      defaultZone: http://poc-eureka:8000/eureka/
+      defaultZone: http://poc-eureka:8080/eureka/
     registerWithEureka: true
 
 kafka:

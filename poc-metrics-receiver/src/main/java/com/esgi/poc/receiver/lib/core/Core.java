@@ -5,6 +5,7 @@ import com.esgi.poc.receiver.lib.core.utils.miscellaneous.ServerInfos;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import java.lang.annotation.Annotation;
 
@@ -12,7 +13,7 @@ import java.lang.annotation.Annotation;
 @Configuration
 public class Core {
 
-    public Core(final ServerInfos serverInfos, final ApplicationContext appContext) {
+    public Core(final ServerInfos serverInfos, final ApplicationContext appContext, final Environment environment) {
 
         appContext.getBeansWithAnnotation(EnableAgentApplication.class).forEach((beanName, beanInstance) -> {
 
@@ -20,9 +21,13 @@ public class Core {
                 final String canonicalName = beanInstance.getClass().getCanonicalName();
                 final String className = canonicalName.substring(0, canonicalName.indexOf('$'));
                 final Annotation annotation = Class.forName(className).getAnnotation(EnableAgentApplication.class);
+                final EnableAgentApplication agentApplication = (EnableAgentApplication) annotation;
 
-                serverInfos.setIp(((EnableAgentApplication) annotation).ip());
-                serverInfos.setPort(((EnableAgentApplication) annotation).port());
+                final String searchedIpInProperties = environment.getProperty(agentApplication.ip(), agentApplication.ip());
+                final String searchedPortInProperties = environment.getProperty(agentApplication.port(), agentApplication.port());
+
+                serverInfos.setIp(searchedIpInProperties);
+                serverInfos.setPort(searchedPortInProperties);
 
             } catch (final ClassNotFoundException e) {
                 log.error(e.getMessage());

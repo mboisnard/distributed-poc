@@ -6,5 +6,9 @@ spring:
   profiles:
     active: test
 
-topic:
-  name: poc-metrics
+kafka:
+  server:
+    ip: localhost
+    port: 9092
+  topic:
+    name: poc-metrics

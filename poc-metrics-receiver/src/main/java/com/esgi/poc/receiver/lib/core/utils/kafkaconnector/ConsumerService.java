@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConsumerService {
 
-    @KafkaListener(topics = "${topic.name}")
+    @KafkaListener(topics = "${kafka.topic.name}")
     public void consumeMessage(final Metrics metrics) {
 
         log.info(metrics.toString());

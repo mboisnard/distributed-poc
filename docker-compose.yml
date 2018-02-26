@@ -1,4 +1,3 @@
-
 version: '3.5'
 
 networks:
@@ -15,7 +14,7 @@ services:
     networks:
       - kafka-network
     environment:
-      ADVERTISED_HOST: localhost
+      ADVERTISED_HOST: poc-kafka
       ADVERTISED_PORT: 9092
 
   poc-eureka:
