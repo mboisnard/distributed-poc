@@ -1,31 +1,17 @@
 package com.esgi.poc.receiver.lib.core.utils.kafkaconnector;
 
 import com.esgi.poc.receiver.lib.core.utils.metrics.Metrics;
-import com.esgi.poc.receiver.lib.core.utils.miscellaneous.AgentLogging;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 public class ConsumerService {
-    private final CountDownLatch latch;
-
-    @Autowired
-    ConsumerService() {
-        this.latch = new CountDownLatch(1);
-    }
 
     @KafkaListener(topics = "${topic.name}")
-    public void consumeMessage(Metrics m) {
-        /*AgentLogging.log("received payload='{}'", consumerRecord.toString());
-        latch.countDown();
-        Metrics m = (Metrics)consumerRecord.value();*/
-        System.out.println(m.toString());
+    public void consumeMessage(final Metrics metrics) {
+
+        log.info(metrics.toString());
     }
 }

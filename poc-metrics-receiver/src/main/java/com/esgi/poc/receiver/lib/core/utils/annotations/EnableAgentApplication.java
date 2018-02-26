@@ -13,7 +13,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface EnableAgentApplication {
+
     String ip();
+
     String port();
+
     String topic();
 }

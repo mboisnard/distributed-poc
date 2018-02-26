@@ -23,6 +23,6 @@ eureka:
 
 kafka:
   bootstrap:
-    servers: localhost:9092
+    servers: poc-kafka:9092
   topic:
     metrics: poc-metrics

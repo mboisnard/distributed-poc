@@ -9,6 +9,9 @@ management:
   security:
     enabled: false
 
+topic:
+  name: poc-metrics
+
 eureka:
   instance:
     metadataMap:
