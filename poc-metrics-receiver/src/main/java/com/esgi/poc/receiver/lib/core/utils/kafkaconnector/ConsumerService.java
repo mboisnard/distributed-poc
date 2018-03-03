@@ -23,9 +23,6 @@ public class ConsumerService {
 
     @KafkaListener(topics = "${topic.name}")
     public void consumeMessage(Metrics m) {
-        /*AgentLogging.log("received payload='{}'", consumerRecord.toString());
-        latch.countDown();
-        Metrics m = (Metrics)consumerRecord.value();*/
         System.out.println(m.toString());
     }
 }
