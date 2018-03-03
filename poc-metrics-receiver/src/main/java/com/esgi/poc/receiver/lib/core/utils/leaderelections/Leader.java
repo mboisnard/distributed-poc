@@ -6,8 +6,9 @@ import com.esgi.poc.receiver.lib.core.utils.stack.StackMetrics;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.Comparator;
-import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.esgi.poc.receiver.lib.core.utils.annotations.ConfigRules.*;
 
@@ -19,6 +20,8 @@ public class Leader {
 
     private static String type;
 
+    private static final String NO_LEADER = "No leader elected";
+
     public Leader(final AgentInfos agentInfos) {
         this.agentInfos = agentInfos;
         Leader.type = agentInfos.getType();
@@ -28,45 +31,58 @@ public class Leader {
 
         switch (type) {
             case CPU:
-                return Optional.of(sortByCPU(stackMetrics)).get().orElse("No leader elected");
+                return sortByCPU(stackMetrics);
             case RAM:
-                return Optional.of(Optional.of(sortByRAM(stackMetrics)).get()).orElse("No leader elected");
+                return sortByRAM(stackMetrics);
             case TIMEOUT:
-                return Optional.of(sortByTimeout(stackMetrics)).get().orElse("No leader elected");
+                return sortByTimeout(stackMetrics);
             case MOSTREVELANT:
-                return Optional.of(Optional.of(sortByMostRevelant(stackMetrics)).get()).orElse("No leader elected");
+                return sortByMostRevelant(stackMetrics);
         }
 
         return null;
     }
 
-    private static Optional<String> sortByCPU(final StackMetrics stackMetrics) {
-
-        final Comparator<Metrics> comparator = Comparator.comparingLong(Metrics::getUsedHeap);
-
-        if (stackMetrics.getMetrics().values().stream().min(comparator).isPresent())
-            return Optional.of(stackMetrics.getMetrics().values().stream().min(comparator).get().getMicroserviceId());
-
-        return Optional.empty();
+    private static String sortByCPU(final StackMetrics stackMetrics) {
+        return getMicroserviceByMinComparator(stackMetrics, Comparator.comparingLong(Metrics::getUsedHeap));
     }
 
     private static String sortByRAM(final StackMetrics stackMetrics) {
 
-        final Comparator<Metrics> comp = Comparator.comparingLong(Metrics::getFreeMemory);
-        return String.valueOf(stackMetrics.getMetrics().values().stream().max(comp).get().getMicroserviceId());
+        final Comparator<Metrics> comparator = Comparator.comparingLong(Metrics::getFreeMemory);
+        final Collection<Metrics> metrics = stackMetrics.getMetrics().values();
+
+        final AtomicReference<String> maxRamMicroservice = new AtomicReference<>(NO_LEADER);
+
+        metrics.stream()
+            .max(comparator)
+            .ifPresent(metric -> maxRamMicroservice.set(metric.getMicroserviceId()));
+
+        return maxRamMicroservice.get();
     }
 
-    private static Optional<String> sortByTimeout(final StackMetrics stackMetrics) {
+    private static String sortByTimeout(final StackMetrics stackMetrics) {
 
-        final Comparator<Metrics> comp = Comparator.comparingLong(Metrics::getStartedThreads);
-
-        if (stackMetrics.getMetrics().values().stream().min(comp).isPresent())
-            return Optional.of(stackMetrics.getMetrics().values().stream().min(comp).get().getMicroserviceId());
-        else
-            return Optional.empty();
+        return getMicroserviceByMinComparator(
+            stackMetrics,
+            Comparator.comparingLong(Metrics::getStartedThreads)
+        );
     }
 
     private static String sortByMostRevelant(final StackMetrics stackMetrics) {
-        return "";
+        return NO_LEADER;
+    }
+
+    private static String getMicroserviceByMinComparator(final StackMetrics stackMetrics,
+                                                         final Comparator<Metrics> metricsComparator) {
+
+        final Collection<Metrics> metrics = stackMetrics.getMetrics().values();
+        final AtomicReference<String> minValMicroservice = new AtomicReference<>(NO_LEADER);
+
+        metrics.stream()
+            .min(metricsComparator)
+            .ifPresent(metric -> minValMicroservice.set(metric.getMicroserviceId()));
+
+        return minValMicroservice.get();
     }
 }

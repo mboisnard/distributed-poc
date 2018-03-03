@@ -12,16 +12,16 @@ class ConsumerService {
 
     private final StackMicroservices stackMicroservices;
 
-    ConsumerService() {
-        this.stackMicroservices = new StackMicroservices();
+    ConsumerService(final StackMicroservices stackMicroservices) {
+        this.stackMicroservices = stackMicroservices;
     }
 
     @KafkaListener(topics = "${kafka.topic.name}")
     public void consumeMessage(final Metrics metrics) {
 
         stackMicroservices.push(metrics);
-        stackMicroservices.getMicroservices().forEach((k, v) -> {
-            log.info("Leader elected for " + k + ": " + v.getLeader());
+        stackMicroservices.getMicroservices().forEach((microserviceId, stackMetrics) -> {
+            log.info("Leader elected for " + microserviceId + ": " + stackMetrics.getLeader());
         });
     }
 }

@@ -1,10 +1,12 @@
 package com.esgi.poc.receiver.lib.core.utils.stack;
 
 import com.esgi.poc.receiver.lib.core.utils.metrics.Metrics;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class StackMicroservices extends Stack<String, StackMetrics> {
 
     public StackMicroservices() {
