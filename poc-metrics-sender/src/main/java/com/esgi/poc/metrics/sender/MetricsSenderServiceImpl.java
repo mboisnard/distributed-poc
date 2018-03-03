@@ -16,6 +16,8 @@ import java.util.Map;
 @Service
 @Slf4j
 class MetricsSenderServiceImpl implements MetricsSenderService {
+    @Value("${spring.application.name}")
+    private final String appName = null;
 
     private final MetricsEndpoint metricsEndpoint;
 
@@ -59,6 +61,7 @@ class MetricsSenderServiceImpl implements MetricsSenderService {
         final Long freeDiskSpace = (Long) diskSpaceHealth.getDetails().getOrDefault("free", 0);
 
         final Metrics metricsToSend = Metrics.builder()
+            .groupId(appName)
             .microserviceId(instanceId)
             .totalMemory(totalMemory)
             .freeMemory(freeMemory)
