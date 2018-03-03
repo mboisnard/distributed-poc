@@ -5,3 +5,10 @@ eureka:
 spring:
   profiles:
     active: test
+
+kafka:
+  server:
+    ip: localhost
+    port: 9092
+  topic:
+    name: poc-metrics

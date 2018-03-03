@@ -3,11 +3,18 @@ spring:
     name: poc-agent
 
 server:
-  port: 0
+  port: 8080
 
 management:
   security:
     enabled: false
+
+kafka:
+  server:
+    ip: poc-kafka
+    port: 9092
+  topic:
+    name: poc-metrics
 
 eureka:
   instance:
@@ -18,5 +25,5 @@ eureka:
     enabled: true
   client:
     serviceUrl:
-      defaultZone: http://poc-eureka:8000/eureka/
+      defaultZone: http://poc-eureka:8080/eureka/
     registerWithEureka: true

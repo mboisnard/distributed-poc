@@ -24,18 +24,4 @@ public class Metrics {
     private Long totalDiskSpace;
 
     private Long freeDiskSpace;
-
-    public String toString(){
-        return "{\n" +
-                "\t\"microserviceId\" : " + getMicroserviceId() + ",\n" +
-                "\t\"totalMemory\" : " + getTotalMemory() + ",\n" +
-                "\t\"freeMemory\" : " + getFreeMemory() + ",\n" +
-                "\t\"cpuNumber\" : " + getCpuNumber() + ",\n" +
-                "\t\"totalHeap\" : " + getTotalHeap() + ",\n" +
-                "\t\"usedHeap\" : " + getUsedHeap() + "," + "\n" +
-                "\t\"startedThreads\" : " + getStartedThreads() + ",\n" +
-                "\t\"totalDiskSpace\" : " + getTotalDiskSpace() + ",\n" +
-                "\t\"freeDiskSpace\" : " + getFreeDiskSpace() + "\n" +
-                "}\n";
-    }
 }

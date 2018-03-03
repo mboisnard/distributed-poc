@@ -1,11 +1,4 @@
-
 version: '3.5'
-
-volumes:
-  zookeeper-data-volume:
-  zookeeper-logs-volume:
-  kafka-data-volume:
-  kafka-logs-volume:
 
 networks:
   spring-cloud-network:
@@ -15,16 +8,14 @@ services:
 
   poc-kafka:
     image: spotify/kafka:latest
-    volumes:
-      - kafka-data-volume:/data
-      - kafka-logs-volume:/logs
     ports:
+      - 2181:2181
       - 9092:9092
     networks:
       - kafka-network
     environment:
-      ZOOKEEPER_IP: poc-zookeeper
-      KAFKA_ADVERTISED_HOST_NAME: "192.168.56.210"
+      ADVERTISED_HOST: poc-kafka
+      ADVERTISED_PORT: 9092
 
   poc-eureka:
     build:

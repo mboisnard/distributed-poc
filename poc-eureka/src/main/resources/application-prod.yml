@@ -2,13 +2,16 @@ spring:
   application:
     name: poc-eureka
 
+server:
+  port: 8080
+
 management:
   security:
     enabled: false
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: poc-eureka
   client:
     registerWithEureka: false
     fetchRegistry: false
