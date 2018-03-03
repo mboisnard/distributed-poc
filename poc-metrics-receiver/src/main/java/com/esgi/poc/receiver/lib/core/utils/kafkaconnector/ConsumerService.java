@@ -8,15 +8,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class ConsumerService {
-    StackMicroservices stackMicroservices;
+class ConsumerService {
 
-    public ConsumerService() {
+    private final StackMicroservices stackMicroservices;
+
+    ConsumerService() {
         this.stackMicroservices = new StackMicroservices();
     }
 
     @KafkaListener(topics = "${kafka.topic.name}")
     public void consumeMessage(final Metrics metrics) {
+
         stackMicroservices.push(metrics);
         stackMicroservices.getMicroservices().forEach((k, v) -> {
             log.info("Leader elected for " + k + ": " + v.getLeader());

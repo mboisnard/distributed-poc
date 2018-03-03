@@ -8,9 +8,14 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ConfigRules {
+
     String CPU = "CPU";
+
     String RAM = "RAM";
+
     String TIMEOUT = "TIMEOUT";
+
     String MOSTREVELANT = "MOSTREVELANT";
+
     String type();
 }

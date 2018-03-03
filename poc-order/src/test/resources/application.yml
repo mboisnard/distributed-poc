@@ -5,6 +5,8 @@ eureka:
 spring:
   profiles:
     active: test
+  application:
+      name: poc-order
 
 kafka:
   bootstrap:

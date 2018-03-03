@@ -33,7 +33,6 @@ class KafkaConsumerConfig {
     public Map<String, Object> consumerConfigs() {
 
         final String bootstrapServers = agentInfos.getIp() + ":" + agentInfos.getPort();
-        log.info("Kafka informations " + bootstrapServers);
 
         final Map<String, Object> props = new HashMap<>();
 

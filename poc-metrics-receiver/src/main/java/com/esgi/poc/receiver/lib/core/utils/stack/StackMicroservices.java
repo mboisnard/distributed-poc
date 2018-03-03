@@ -6,16 +6,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StackMicroservices extends Stack<String, StackMetrics> {
-    public StackMicroservices(){
+
+    public StackMicroservices() {
         stack = new HashMap<>();
     }
 
-    public Map<String, StackMetrics> getMicroservices(){
+    public Map<String, StackMetrics> getMicroservices() {
         return stack;
     }
 
-    public void push(Metrics metrics){
-        stack.getOrDefault(metrics.getGroupId(), stack.put(metrics.getGroupId(), new StackMetrics()));
-        stack.get(metrics.getGroupId()).push(metrics);
+    public void push(final Metrics metrics) {
+
+        stack.getOrDefault(
+            metrics.getGroupId(),
+            stack.put(metrics.getGroupId(), new StackMetrics())
+        );
+
+        stack.get(metrics.getGroupId())
+            .push(metrics);
     }
 }
