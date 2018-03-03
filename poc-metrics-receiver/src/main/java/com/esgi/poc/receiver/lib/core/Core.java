@@ -19,13 +19,14 @@ public class Core {
         appContext.getBeansWithAnnotation(EnableAgentApplication.class).forEach((beanName, beanInstance) -> {
 
             try {
-                final String canonicalName = beanInstance.getClass().getCanonicalName();
-                final String className = canonicalName.substring(0, canonicalName.indexOf('$'));
-                final Annotation annotation = Class.forName(className).getAnnotation(EnableAgentApplication.class);
+                final Annotation annotation = getAnnotation(beanInstance, EnableAgentApplication.class);
                 final EnableAgentApplication agentApplication = (EnableAgentApplication) annotation;
 
-                final String searchedIpInProperties = environment.getProperty(agentApplication.ip(), agentApplication.ip());
-                final String searchedPortInProperties = environment.getProperty(agentApplication.port(), agentApplication.port());
+                final String searchedIpInProperties = environment.getProperty(
+                    agentApplication.ip(), agentApplication.ip());
+
+                final String searchedPortInProperties = environment.getProperty(
+                    agentApplication.port(), agentApplication.port());
 
                 agentInfos.setIp(searchedIpInProperties);
                 agentInfos.setPort(searchedPortInProperties);
@@ -41,12 +42,11 @@ public class Core {
         appContext.getBeansWithAnnotation(ConfigRules.class).forEach((beanName, beanInstance) -> {
 
             try {
-                final String canonicalName = beanInstance.getClass().getCanonicalName();
-                final String className = canonicalName.substring(0, canonicalName.indexOf('$'));
-                final Annotation annotation = Class.forName(className).getAnnotation(ConfigRules.class);
+                final Annotation annotation = getAnnotation(beanInstance, ConfigRules.class);
                 final ConfigRules agentApplication = (ConfigRules) annotation;
 
-                final String searchedTypeInProperties = environment.getProperty(agentApplication.type(), agentApplication.type());
+                final String searchedTypeInProperties = environment.getProperty(
+                    agentApplication.type(), agentApplication.type());
 
                 agentInfos.setType(searchedTypeInProperties);
 
@@ -56,5 +56,14 @@ public class Core {
         });
 
         log.info("Type enabled: " + agentInfos.getType());
+    }
+
+    private Annotation getAnnotation(final Object beanInstance, final Class annotationClass)
+        throws ClassNotFoundException {
+
+        final String canonicalName = beanInstance.getClass().getCanonicalName();
+        final String className = canonicalName.substring(0, canonicalName.indexOf('$'));
+
+        return Class.forName(className).getAnnotation(annotationClass);
     }
 }

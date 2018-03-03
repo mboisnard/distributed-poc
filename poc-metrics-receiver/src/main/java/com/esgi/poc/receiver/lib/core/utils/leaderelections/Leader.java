@@ -15,15 +15,11 @@ import static com.esgi.poc.receiver.lib.core.utils.annotations.ConfigRules.*;
 @Component
 @Slf4j
 public class Leader {
-
-    private final AgentInfos agentInfos;
-
     private static String type;
 
     private static final String NO_LEADER = "No leader elected";
 
     public Leader(final AgentInfos agentInfos) {
-        this.agentInfos = agentInfos;
         Leader.type = agentInfos.getType();
     }
 
@@ -38,13 +34,13 @@ public class Leader {
                 return sortByTimeout(stackMetrics);
             case MOSTREVELANT:
                 return sortByMostRevelant(stackMetrics);
+            default:
+                return NO_LEADER;
         }
-
-        return null;
     }
 
     private static String sortByCPU(final StackMetrics stackMetrics) {
-        return getMicroserviceByMinComparator(stackMetrics, Comparator.comparingLong(Metrics::getUsedHeap));
+        return getMicroserviceIdByMinComparator(stackMetrics, Comparator.comparingLong(Metrics::getUsedHeap));
     }
 
     private static String sortByRAM(final StackMetrics stackMetrics) {
@@ -63,7 +59,7 @@ public class Leader {
 
     private static String sortByTimeout(final StackMetrics stackMetrics) {
 
-        return getMicroserviceByMinComparator(
+        return getMicroserviceIdByMinComparator(
             stackMetrics,
             Comparator.comparingLong(Metrics::getStartedThreads)
         );
@@ -73,8 +69,8 @@ public class Leader {
         return NO_LEADER;
     }
 
-    private static String getMicroserviceByMinComparator(final StackMetrics stackMetrics,
-                                                         final Comparator<Metrics> metricsComparator) {
+    private static String getMicroserviceIdByMinComparator(final StackMetrics stackMetrics,
+                                                           final Comparator<Metrics> metricsComparator) {
 
         final Collection<Metrics> metrics = stackMetrics.getMetrics().values();
         final AtomicReference<String> minValMicroservice = new AtomicReference<>(NO_LEADER);

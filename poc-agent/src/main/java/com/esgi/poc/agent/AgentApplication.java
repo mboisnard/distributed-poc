@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAgentApplication(ip = "kafka.server.ip", port = "kafka.server.port", topic = "kafka.topic.name")
 @ConfigRules(type = ConfigRules.CPU)
 public class AgentApplication {
-    public static void main(String[] args) {
+
+    public static void main(final String[] args) {
         SpringApplication.run(AgentApplication.class);
     }
 }
