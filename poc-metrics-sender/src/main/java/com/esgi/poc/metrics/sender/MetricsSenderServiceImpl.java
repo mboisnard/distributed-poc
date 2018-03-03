@@ -46,7 +46,7 @@ class MetricsSenderServiceImpl implements MetricsSenderService {
         final Map<String, Object> metricsDetails = metricsEndpoint.invoke();
         final Map<String, Object> healthDetails = healthEndpoint.invoke().getDetails();
 
-        final String instanceId = eurekaClient.getApplicationInfoManager().getInfo().getInstanceId();
+        final String instanceId = eurekaClient != null ? eurekaClient.getApplicationInfoManager().getInfo().getInstanceId() : null;
         final Long totalMemory = (Long) metricsDetails.getOrDefault("mem", 0);
         final Long freeMemory = (Long) metricsDetails.getOrDefault("mem.free", 0);
         final Integer cpuNumber = (Integer) metricsDetails.getOrDefault("processors", 0);

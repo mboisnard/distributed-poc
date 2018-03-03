@@ -20,3 +20,9 @@ eureka:
     serviceUrl:
       defaultZone: http://poc-eureka:8080/eureka/
     registerWithEureka: true
+
+kafka:
+  bootstrap:
+    servers: poc-kafka:9092
+  topic:
+    metrics: poc-metrics

@@ -32,21 +32,49 @@ services:
       - spring-cloud-network
       - kafka-network
 
-  poc-customer:
+  poc-customer1:
     build:
       context: ./poc-customer
     networks:
       - spring-cloud-network
       - kafka-network
 
-  poc-order:
+  poc-customer2:
+    build:
+      context: ./poc-customer
+    networks:
+      - spring-cloud-network
+      - kafka-network
+
+  poc-customer3:
+    build:
+      context: ./poc-customer
+    networks:
+      - spring-cloud-network
+      - kafka-network
+
+  poc-order1:
     build:
       context: ./poc-order
     networks:
       - spring-cloud-network
       - kafka-network
 
-  poc-proposal:
+  poc-order2:
+    build:
+      context: ./poc-order
+    networks:
+      - spring-cloud-network
+      - kafka-network
+
+  poc-proposal1:
+    build:
+      context: ./poc-proposal
+    networks:
+      - spring-cloud-network
+      - kafka-network
+
+  poc-proposal2:
     build:
       context: ./poc-proposal
     networks:
