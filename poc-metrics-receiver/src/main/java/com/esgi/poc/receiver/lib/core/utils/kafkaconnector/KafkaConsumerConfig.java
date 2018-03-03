@@ -1,7 +1,7 @@
 package com.esgi.poc.receiver.lib.core.utils.kafkaconnector;
 
 import com.esgi.poc.receiver.lib.core.utils.metrics.Metrics;
-import com.esgi.poc.receiver.lib.core.utils.miscellaneous.ServerInfos;
+import com.esgi.poc.receiver.lib.core.utils.miscellaneous.AgentInfos;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -21,18 +21,18 @@ import java.util.Map;
 @Configuration
 class KafkaConsumerConfig {
 
-    private final ServerInfos serverInfos;
+    private final AgentInfos agentInfos;
 
     private static final String CONSUMER_GROUP = "consumerGroup#1";
 
-    KafkaConsumerConfig(final ServerInfos serverInfos) {
-        this.serverInfos = serverInfos;
+    KafkaConsumerConfig(final AgentInfos agentInfos) {
+        this.agentInfos = agentInfos;
     }
 
     @Bean
     public Map<String, Object> consumerConfigs() {
 
-        final String bootstrapServers = serverInfos.getIp() + ":" + serverInfos.getPort();
+        final String bootstrapServers = agentInfos.getIp() + ":" + agentInfos.getPort();
         log.info("Kafka informations " + bootstrapServers);
 
         final Map<String, Object> props = new HashMap<>();
