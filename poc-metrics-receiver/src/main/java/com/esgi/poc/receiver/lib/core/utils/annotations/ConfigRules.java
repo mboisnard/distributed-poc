@@ -17,5 +17,5 @@ public @interface ConfigRules {
 
     String MOSTREVELANT = "MOSTREVELANT";
 
-    String type();
+    String type() default CPU;
 }

@@ -20,8 +20,13 @@ class ConsumerService {
     public void consumeMessage(final Metrics metrics) {
 
         stackMicroservices.push(metrics);
-        stackMicroservices.getMicroservices().forEach((microserviceId, stackMetrics) -> {
-            log.info("Leader elected for " + microserviceId + ": " + stackMetrics.getLeader());
-        });
+
+        log.info("*********");
+
+        stackMicroservices.getMicroservices().forEach((microserviceId, stackMetrics) ->
+            log.info("Leader elected for " + microserviceId + ": " + stackMetrics.getLeader())
+        );
+
+        log.info("*********");
     }
 }

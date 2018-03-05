@@ -26,8 +26,6 @@ public class StackMetrics extends Stack<String, Metrics> {
         );
 
         stack.replace(metrics.getMicroserviceId(), metrics);
-
-        log.info(metrics.toString());
     }
 
     public String getLeader() {
